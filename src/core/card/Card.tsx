@@ -11,8 +11,6 @@ export const Card: FC<Card> = ({ item, index }) => {
   let mydate = item && new Date(+item.created_date);
   let mypersiandate = mydate.toLocaleDateString("fa-IR");
 
-  console.log(mydate);
-
   return (
     <Container sx={{ mt: "30px" }}>
       <Box>

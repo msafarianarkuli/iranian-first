@@ -29,6 +29,7 @@ export const useFormHandler = () => {
       name: "county",
       label: "شهر",
       options: countries,
+      disabled: !!provinceId ? false : true,
     },
     {
       type: "text",

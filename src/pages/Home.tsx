@@ -14,26 +14,25 @@ import { Card } from "../core/card/Card";
 const Home = () => {
   const [page, setPage] = useState(1);
   const formHandler = useFormHandler();
-
-  const defaultValues = formHandler.formData
-    ?.map((item) => ({ [item.name]: "" }))
-    .reduce((acc, curr) => {
-      return { ...acc, ...curr };
-    }, {});
-
-  const formController = useForm<FieldValues>(defaultValues);
-  const {
-    handleSubmit,
-    reset,
-    setValue,
-    watch,
-    formState: { isSubmitSuccessful },
-  } = formController;
+  const formController = useForm<FieldValues>();
+  const { handleSubmit, reset, getValues } = formController;
 
   const { mutate, data, isPending } = useMutation({
     mutationFn: addList,
-    mutationKey: ["add", page],
+    mutationKey: ["add"],
   });
+
+  const areAllInputsEmpty = () => {
+    const formValues = getValues();
+
+    for (const key in formValues) {
+      if (formValues[key]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const body = {
@@ -48,24 +47,29 @@ const Home = () => {
     mutate({ body, page });
   };
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
+  const handlereset = () => {
+    if (!areAllInputsEmpty()) {
+      reset();
       mutate({
-        body: {
-          ...formController.getValues(),
-          branch: "all",
-          state: "branch_file_list",
-        },
-        page: page,
+        body: {},
+        page: 1,
       });
     }
-  }, [page]);
+  };
 
   const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     value: number
   ) => {
     setPage(value);
+    mutate({
+      body: {
+        ...formController.getValues(),
+        branch: "all",
+        state: "branch_file_list",
+      },
+      page: value,
+    });
   };
 
   return (
@@ -86,7 +90,7 @@ const Home = () => {
               <CustomButton
                 sx={{ mt: "23px" }}
                 text="حذف فیلتر ها"
-                onClick={() => reset(defaultValues)}
+                onClick={handlereset}
               />
             </Grid>
           </Grid>

@@ -1,17 +1,7 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  createRoutesFromElements,
-} from "react-router-dom";
-
-import Home from "./Home";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
 
 function ReactRouter() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(<Route path="/" element={<Home />}></Route>)
-  );
-
   return <RouterProvider router={router} />;
 }
 

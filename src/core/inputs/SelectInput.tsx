@@ -45,6 +45,7 @@ const SelectInput: FC<SelectionInputProps> = (props) => {
         size="small"
         value={value}
         onChange={onInputChange}
+        disabled={disabled}
       >
         {options?.map((item) => (
           <MenuItem key={item.value} value={item.value}>
