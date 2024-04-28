@@ -29,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "panda codegen",
+    "panda": "panda --watch"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +52,9 @@
     ]
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.37.2",
     "@types/react-query": "^1.2.9",
-    "@types/stylis": "^4.2.5"
+    "@types/stylis": "^4.2.5",
+    "postcss": "^8.4.38"
   }
 }

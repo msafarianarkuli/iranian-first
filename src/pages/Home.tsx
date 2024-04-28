@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Grid, Pagination } from "@mui/material";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Container, CustomButton } from "../core";
 
@@ -13,7 +13,6 @@ import { Card } from "../core/card/Card";
 
 const Home = () => {
   const [page, setPage] = useState(1);
-  const formHandler = useFormHandler();
   const formController = useForm<FieldValues>();
   const { handleSubmit, reset, getValues } = formController;
 
@@ -33,6 +32,7 @@ const Home = () => {
 
     return true;
   };
+  const formHandler = useFormHandler(areAllInputsEmpty());
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const body = {

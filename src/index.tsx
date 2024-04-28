@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./assets/styles/index.css";
 import reportWebVitals from "./reportWebVitals";
 import ReactRouter from "./pages";
 import ReactQueryProvider from "./pages/ReactQuery";
 import { Rtl } from "./theme/theme";
+import "./styled-system/styles.css";
+import "./assets/styles/index.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

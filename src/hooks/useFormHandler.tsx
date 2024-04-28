@@ -3,7 +3,7 @@ import { FormInputsData } from "../formBuilder/formBuilderInterTypes";
 import { useFileTypes, useProvinces } from "../services/hooks";
 import { useCountries } from "../services/hooks/useCountries";
 
-export const useFormHandler = () => {
+export const useFormHandler = (disable: boolean) => {
   const [disableInputs, setDisableInputs] = useState({ county: true });
   const [provinceId, setProvinceId] = useState<string | number>("");
 
@@ -29,7 +29,8 @@ export const useFormHandler = () => {
       name: "county",
       label: "شهر",
       options: countries,
-      disabled: !!provinceId ? false : true,
+      // disabled: !!provinceId ? false : true,
+      disabled: disable,
     },
     {
       type: "text",
